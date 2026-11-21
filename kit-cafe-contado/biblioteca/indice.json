@@ -1,0 +1,1482 @@
+{
+ "bg_auction.png": {
+  "categoria": "cenarios",
+  "caminho": "biblioteca/cenarios/bg_auction.png",
+  "nome_no_codigo": "bg_auction",
+  "criado_em": "ST2-PT6"
+ },
+ "bg_blackfrost.png": {
+  "categoria": "cenarios",
+  "caminho": "biblioteca/cenarios/bg_blackfrost.png",
+  "nome_no_codigo": "bg_blackfrost",
+  "criado_em": "ST3-PT2"
+ },
+ "bg_busin.png": {
+  "categoria": "cenarios",
+  "caminho": "biblioteca/cenarios/bg_busin.png",
+  "nome_no_codigo": "bg_busin",
+  "criado_em": "ST3-PT1"
+ },
+ "bg_cerrado.png": {
+  "categoria": "cenarios",
+  "caminho": "biblioteca/cenarios/bg_cerrado.png",
+  "nome_no_codigo": "bg_cerrado",
+  "criado_em": "ST3-PT3"
+ },
+ "bg_cupping.png": {
+  "categoria": "cenarios",
+  "caminho": "biblioteca/cenarios/bg_cupping.png",
+  "nome_no_codigo": "bg_cupping",
+  "criado_em": "ST3-PT6"
+ },
+ "bg_dubai.png": {
+  "categoria": "cenarios",
+  "caminho": "biblioteca/cenarios/bg_dubai.png",
+  "nome_no_codigo": "bg_dubai",
+  "criado_em": "ST2-PT6"
+ },
+ "bg_exchange.png": {
+  "categoria": "cenarios",
+  "caminho": "biblioteca/cenarios/bg_exchange.png",
+  "nome_no_codigo": "bg_exchange",
+  "criado_em": "ST3-PT6"
+ },
+ "bg_field.png": {
+  "categoria": "cenarios",
+  "caminho": "biblioteca/cenarios/bg_field.png",
+  "nome_no_codigo": "bg_field",
+  "criado_em": "ST2-PT6"
+ },
+ "bg_frost.png": {
+  "categoria": "cenarios",
+  "caminho": "biblioteca/cenarios/bg_frost.png",
+  "nome_no_codigo": "bg_frost",
+  "criado_em": "ST3-PT1"
+ },
+ "bg_minas.png": {
+  "categoria": "cenarios",
+  "caminho": "biblioteca/cenarios/bg_minas.png",
+  "nome_no_codigo": "bg_minas",
+  "criado_em": "ST3-PT5"
+ },
+ "bg_parana.png": {
+  "categoria": "cenarios",
+  "caminho": "biblioteca/cenarios/bg_parana.png",
+  "nome_no_codigo": "bg_parana",
+  "criado_em": "ST3-PT1"
+ },
+ "bg_road.png": {
+  "categoria": "cenarios",
+  "caminho": "biblioteca/cenarios/bg_road.png",
+  "nome_no_codigo": "bg_road",
+  "criado_em": "ST2-PT6"
+ },
+ "bg_roast.png": {
+  "categoria": "cenarios",
+  "caminho": "biblioteca/cenarios/bg_roast.png",
+  "nome_no_codigo": "bg_roast",
+  "criado_em": "ST3-PT5"
+ },
+ "bg_sitio.png": {
+  "categoria": "cenarios",
+  "caminho": "biblioteca/cenarios/bg_sitio.png",
+  "nome_no_codigo": "bg_sitio",
+  "criado_em": "ST3-PT1"
+ },
+ "bg_town.png": {
+  "categoria": "cenarios",
+  "caminho": "biblioteca/cenarios/bg_town.png",
+  "nome_no_codigo": "bg_town",
+  "criado_em": "ST3-PT1"
+ },
+ "page_cream_v.jpg": {
+  "categoria": "papeis-de-fundo",
+  "caminho": "biblioteca/papeis-de-fundo/page_cream_v.jpg",
+  "nome_no_codigo": "cream",
+  "criado_em": "ST1-PT1"
+ },
+ "page_green_v.jpg": {
+  "categoria": "papeis-de-fundo",
+  "caminho": "biblioteca/papeis-de-fundo/page_green_v.jpg",
+  "nome_no_codigo": "green",
+  "criado_em": "ST1-PT1"
+ },
+ "page_kraft.jpg": {
+  "categoria": "papeis-de-fundo",
+  "caminho": "biblioteca/papeis-de-fundo/page_kraft.jpg",
+  "nome_no_codigo": null,
+  "criado_em": "estilo 06-collage"
+ },
+ "page_kraft_v.jpg": {
+  "categoria": "papeis-de-fundo",
+  "caminho": "biblioteca/papeis-de-fundo/page_kraft_v.jpg",
+  "nome_no_codigo": "kraft",
+  "criado_em": "ST1-PT1"
+ },
+ "page_red.jpg": {
+  "categoria": "papeis-de-fundo",
+  "caminho": "biblioteca/papeis-de-fundo/page_red.jpg",
+  "nome_no_codigo": null,
+  "criado_em": "estilo 06-collage"
+ },
+ "page_red_v.jpg": {
+  "categoria": "papeis-de-fundo",
+  "caminho": "biblioteca/papeis-de-fundo/page_red_v.jpg",
+  "nome_no_codigo": "red",
+  "criado_em": "ST1-PT1"
+ },
+ "antonio_face.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/antonio_face.png",
+  "nome_no_codigo": "antonioface",
+  "criado_em": "ST1-PT3"
+ },
+ "antonio_jaw.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/antonio_jaw.png",
+  "nome_no_codigo": "antoniojaw",
+  "criado_em": "ST1-PT3"
+ },
+ "buyer_face.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/buyer_face.png",
+  "nome_no_codigo": "buyerface",
+  "criado_em": "ST1-PT3"
+ },
+ "buyer_jaw.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/buyer_jaw.png",
+  "nome_no_codigo": "buyerjaw",
+  "criado_em": "ST1-PT3"
+ },
+ "cleitinho_face.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/cleitinho_face.png",
+  "nome_no_codigo": "cleitinhoface",
+  "criado_em": "ST2-PT1"
+ },
+ "cleitinho_jaw.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/cleitinho_jaw.png",
+  "nome_no_codigo": "cleitinhojaw",
+  "criado_em": "ST2-PT1"
+ },
+ "consul_face.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/consul_face.png",
+  "nome_no_codigo": "consulface",
+  "criado_em": "ST2-PT3"
+ },
+ "consul_jaw.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/consul_jaw.png",
+  "nome_no_codigo": "consuljaw",
+  "criado_em": "ST2-PT3"
+ },
+ "daniel_face.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/daniel_face.png",
+  "nome_no_codigo": "danielface",
+  "criado_em": "ST2-PT6"
+ },
+ "daniel_jaw.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/daniel_jaw.png",
+  "nome_no_codigo": "danieljaw",
+  "criado_em": "ST2-PT6"
+ },
+ "guia_face.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/guia_face.png",
+  "nome_no_codigo": "guiaface",
+  "criado_em": "ST2-PT1"
+ },
+ "guia_jaw.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/guia_jaw.png",
+  "nome_no_codigo": "guiajaw",
+  "criado_em": "ST2-PT1"
+ },
+ "idalina_face.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/idalina_face.png",
+  "nome_no_codigo": "idalinaface",
+  "criado_em": "ST3-PT5"
+ },
+ "idalina_jaw.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/idalina_jaw.png",
+  "nome_no_codigo": "idalinajaw",
+  "criado_em": "ST3-PT5"
+ },
+ "lurdes_face.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/lurdes_face.png",
+  "nome_no_codigo": "lface",
+  "criado_em": "ST1-PT1"
+ },
+ "lurdes_jaw.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/lurdes_jaw.png",
+  "nome_no_codigo": "ljaw",
+  "criado_em": "ST1-PT1"
+ },
+ "neto_face.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/neto_face.png",
+  "nome_no_codigo": "nface",
+  "criado_em": "ST1-PT1"
+ },
+ "neto_jaw.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/neto_jaw.png",
+  "nome_no_codigo": "njaw",
+  "criado_em": "ST1-PT1"
+ },
+ "p_face.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/p_face.png",
+  "nome_no_codigo": "pface",
+  "criado_em": "estilo 06-collage"
+ },
+ "p_jaw.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/p_jaw.png",
+  "nome_no_codigo": "pjaw",
+  "criado_em": "estilo 06-collage"
+ },
+ "p_lid.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/p_lid.png",
+  "nome_no_codigo": "plid",
+  "criado_em": "estilo 06-collage"
+ },
+ "pachi_face.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/pachi_face.png",
+  "nome_no_codigo": "pachiface",
+  "criado_em": "ST2-PT3"
+ },
+ "pachi_jaw.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/pachi_jaw.png",
+  "nome_no_codigo": "pachijaw",
+  "criado_em": "ST2-PT3"
+ },
+ "peterson_face.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/peterson_face.png",
+  "nome_no_codigo": "petersonface",
+  "criado_em": "ST2-PT2"
+ },
+ "peterson_jaw.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/peterson_jaw.png",
+  "nome_no_codigo": "petersonjaw",
+  "criado_em": "ST2-PT2"
+ },
+ "rachel_face.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/rachel_face.png",
+  "nome_no_codigo": "rachelface",
+  "criado_em": "ST2-PT6"
+ },
+ "rachel_jaw.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/rachel_jaw.png",
+  "nome_no_codigo": "racheljaw",
+  "criado_em": "ST2-PT6"
+ },
+ "rudolph_face.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/rudolph_face.png",
+  "nome_no_codigo": "rudolphface",
+  "criado_em": "ST2-PT3"
+ },
+ "rudolph_jaw.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/rudolph_jaw.png",
+  "nome_no_codigo": "rudolphjaw",
+  "criado_em": "ST2-PT3"
+ },
+ "taster_face.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/taster_face.png",
+  "nome_no_codigo": "tasterface",
+  "criado_em": "ST3-PT6"
+ },
+ "taster_jaw.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/taster_jaw.png",
+  "nome_no_codigo": "tasterjaw",
+  "criado_em": "ST3-PT6"
+ },
+ "tonho_face.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/tonho_face.png",
+  "nome_no_codigo": "tonhoface",
+  "criado_em": "ST3-PT1"
+ },
+ "tonho_jaw.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/tonho_jaw.png",
+  "nome_no_codigo": "tonhojaw",
+  "criado_em": "ST3-PT1"
+ },
+ "tonhokid_face.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/tonhokid_face.png",
+  "nome_no_codigo": "tonhokidface",
+  "criado_em": "ST3-PT1"
+ },
+ "tonhokid_jaw.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/tonhokid_jaw.png",
+  "nome_no_codigo": "tonhokidjaw",
+  "criado_em": "ST3-PT1"
+ },
+ "tonhovelho_face.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/tonhovelho_face.png",
+  "nome_no_codigo": "tonhovelhoface",
+  "criado_em": "ST3-PT1"
+ },
+ "tonhovelho_jaw.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/tonhovelho_jaw.png",
+  "nome_no_codigo": "tonhovelhojaw",
+  "criado_em": "ST3-PT1"
+ },
+ "ze_face.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/ze_face.png",
+  "nome_no_codigo": "zeface",
+  "criado_em": "ST1-PT4"
+ },
+ "ze_jaw.png": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/ze_jaw.png",
+  "nome_no_codigo": "zejaw",
+  "criado_em": "ST1-PT4"
+ },
+ "balance.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/balance.png",
+  "nome_no_codigo": "balance",
+  "criado_em": "ST3-PT5"
+ },
+ "bank.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/bank.png",
+  "nome_no_codigo": "bank",
+  "criado_em": "ST2-PT4"
+ },
+ "basket.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/basket.png",
+  "nome_no_codigo": "basket",
+  "criado_em": "ST1-PT3"
+ },
+ "bee.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/bee.png",
+  "nome_no_codigo": "bee",
+  "criado_em": "ST1-PT3"
+ },
+ "board.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/board.png",
+  "nome_no_codigo": "board",
+  "criado_em": "ST1-PT1"
+ },
+ "br_eugen.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/br_eugen.png",
+  "nome_no_codigo": "br_eugen",
+  "criado_em": "ST1-PT2"
+ },
+ "breadL.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/breadL.png",
+  "nome_no_codigo": "breadL",
+  "criado_em": "ST3-PT1"
+ },
+ "breadR.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/breadR.png",
+  "nome_no_codigo": "breadR",
+  "criado_em": "ST3-PT1"
+ },
+ "bus.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/bus.png",
+  "nome_no_codigo": "bus",
+  "criado_em": "ST2-PT6"
+ },
+ "cage.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/cage.png",
+  "nome_no_codigo": "cage",
+  "criado_em": "ST2-PT1"
+ },
+ "camera.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/camera.png",
+  "nome_no_codigo": "camera",
+  "criado_em": "ST2-PT1"
+ },
+ "car.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/car.png",
+  "nome_no_codigo": "car",
+  "criado_em": "ST2-PT2"
+ },
+ "chatphone.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/chatphone.png",
+  "nome_no_codigo": "chatphone",
+  "criado_em": "ST3-PT4"
+ },
+ "chromo_a.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/chromo_a.png",
+  "nome_no_codigo": "chromo_a",
+  "criado_em": "ST1-PT2"
+ },
+ "chromo_b.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/chromo_b.png",
+  "nome_no_codigo": "chromo_b",
+  "criado_em": "ST1-PT2"
+ },
+ "civet.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/civet.png",
+  "nome_no_codigo": "civet",
+  "criado_em": "ST2-PT1"
+ },
+ "coins.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/coins.png",
+  "nome_no_codigo": "coins",
+  "criado_em": "ST3-PT1"
+ },
+ "comment.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/comment.png",
+  "nome_no_codigo": "comment",
+  "criado_em": "ST1-PT4"
+ },
+ "cow.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/cow.png",
+  "nome_no_codigo": "cow",
+  "criado_em": "ST2-PT4"
+ },
+ "crown.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/crown.png",
+  "nome_no_codigo": "crown",
+  "criado_em": "ST2-PT6"
+ },
+ "cup.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/cup.png",
+  "nome_no_codigo": "cup",
+  "criado_em": "ST1-PT1"
+ },
+ "dice.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/dice.png",
+  "nome_no_codigo": "dice",
+  "criado_em": "ST3-PT2"
+ },
+ "dna.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/dna.png",
+  "nome_no_codigo": "dna",
+  "criado_em": "ST1-PT2"
+ },
+ "espresso.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/espresso.png",
+  "nome_no_codigo": "espresso",
+  "criado_em": "ST1-PT5"
+ },
+ "fazenda.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/fazenda.png",
+  "nome_no_codigo": "fazenda",
+  "criado_em": "ST3-PT3"
+ },
+ "gate.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/gate.png",
+  "nome_no_codigo": "gate",
+  "criado_em": "ST2-PT4"
+ },
+ "gavel.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/gavel.png",
+  "nome_no_codigo": "gavel",
+  "criado_em": "ST2-PT2"
+ },
+ "handshake.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/handshake.png",
+  "nome_no_codigo": "handshake",
+  "criado_em": "ST3-PT5"
+ },
+ "harvester.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/harvester.png",
+  "nome_no_codigo": "harvester",
+  "criado_em": "ST3-PT3"
+ },
+ "jar.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/jar.png",
+  "nome_no_codigo": "jar",
+  "criado_em": "ST1-PT5"
+ },
+ "laptop.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/laptop.png",
+  "nome_no_codigo": "laptop",
+  "criado_em": "ST2-PT2"
+ },
+ "lotlabel.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/lotlabel.png",
+  "nome_no_codigo": "lotlabel",
+  "criado_em": "ST3-PT6"
+ },
+ "lupa.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/lupa.png",
+  "nome_no_codigo": "lupa",
+  "criado_em": "ST1-PT5"
+ },
+ "medal.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/medal.png",
+  "nome_no_codigo": "medal",
+  "criado_em": "ST1-PT3"
+ },
+ "microscope.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/microscope.png",
+  "nome_no_codigo": "microscope",
+  "criado_em": "ST1-PT2"
+ },
+ "milk.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/milk.png",
+  "nome_no_codigo": "milk",
+  "criado_em": "ST2-PT4"
+ },
+ "money.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/money.png",
+  "nome_no_codigo": "money",
+  "criado_em": "ST2-PT6"
+ },
+ "paddle0.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/paddle0.png",
+  "nome_no_codigo": "paddle0",
+  "criado_em": "ST2-PT6"
+ },
+ "paddle1.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/paddle1.png",
+  "nome_no_codigo": "paddle1",
+  "criado_em": "ST2-PT6"
+ },
+ "paddle2.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/paddle2.png",
+  "nome_no_codigo": "paddle2",
+  "criado_em": "ST2-PT6"
+ },
+ "paddle3.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/paddle3.png",
+  "nome_no_codigo": "paddle3",
+  "criado_em": "ST2-PT6"
+ },
+ "paddle4.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/paddle4.png",
+  "nome_no_codigo": "paddle4",
+  "criado_em": "ST2-PT6"
+ },
+ "paddle5.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/paddle5.png",
+  "nome_no_codigo": "paddle5",
+  "criado_em": "ST2-PT6"
+ },
+ "padlock.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/padlock.png",
+  "nome_no_codigo": "padlock",
+  "criado_em": "ST3-PT5"
+ },
+ "phone.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/phone.png",
+  "nome_no_codigo": "phone",
+  "criado_em": "ST1-PT4"
+ },
+ "pickup.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/pickup.png",
+  "nome_no_codigo": "pickup",
+  "criado_em": "ST3-PT3"
+ },
+ "pie34.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/pie34.png",
+  "nome_no_codigo": "pie34",
+  "criado_em": "ST3-PT2"
+ },
+ "pie63.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/pie63.png",
+  "nome_no_codigo": "pie63",
+  "criado_em": "ST3-PT5"
+ },
+ "piggy.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/piggy.png",
+  "nome_no_codigo": "piggy",
+  "criado_em": "ST3-PT1"
+ },
+ "plane.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/plane.png",
+  "nome_no_codigo": "plane",
+  "criado_em": "ST1-PT4"
+ },
+ "podium.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/podium.png",
+  "nome_no_codigo": "podium",
+  "criado_em": "ST2-PT6"
+ },
+ "qblob.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/qblob.png",
+  "nome_no_codigo": null,
+  "criado_em": "ST1-PT1"
+ },
+ "roast.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/roast.png",
+  "nome_no_codigo": "roast",
+  "criado_em": "ST1-PT5"
+ },
+ "sack_a.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/sack_a.png",
+  "nome_no_codigo": "sackA",
+  "criado_em": "ST1-PT1"
+ },
+ "sack_b.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/sack_b.png",
+  "nome_no_codigo": "sackB",
+  "criado_em": "ST1-PT1"
+ },
+ "score.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/score.png",
+  "nome_no_codigo": "score",
+  "criado_em": "ST2-PT1"
+ },
+ "ship.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/ship.png",
+  "nome_no_codigo": "ship",
+  "criado_em": "ST1-PT6"
+ },
+ "shop.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/shop.png",
+  "nome_no_codigo": "shop",
+  "criado_em": "ST1-PT6"
+ },
+ "sign.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/sign.png",
+  "nome_no_codigo": "sign",
+  "criado_em": "ST2-PT6"
+ },
+ "specbag.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/specbag.png",
+  "nome_no_codigo": "specbag",
+  "criado_em": "ST3-PT5"
+ },
+ "stairs.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/stairs.png",
+  "nome_no_codigo": "stairs",
+  "criado_em": "ST3-PT4"
+ },
+ "suitcase.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/suitcase.png",
+  "nome_no_codigo": "suitcase",
+  "criado_em": "ST3-PT1"
+ },
+ "teacup.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/teacup.png",
+  "nome_no_codigo": "teacup",
+  "criado_em": "ST1-PT6"
+ },
+ "thermo.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/thermo.png",
+  "nome_no_codigo": "thermo",
+  "criado_em": "ST1-PT6"
+ },
+ "ticket.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/ticket.png",
+  "nome_no_codigo": "ticket",
+  "criado_em": "ST3-PT1"
+ },
+ "tray.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/tray.png",
+  "nome_no_codigo": "tray",
+  "criado_em": "ST3-PT6"
+ },
+ "trophy.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/trophy.png",
+  "nome_no_codigo": "trophy",
+  "criado_em": "ST3-PT5"
+ },
+ "warehouse.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/warehouse.png",
+  "nome_no_codigo": "warehouse",
+  "criado_em": "ST1-PT4"
+ },
+ "wheel.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/wheel.png",
+  "nome_no_codigo": "wheel",
+  "criado_em": "ST3-PT1"
+ },
+ "worker0.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/worker0.png",
+  "nome_no_codigo": "worker0",
+  "criado_em": "ST3-PT4"
+ },
+ "worker1.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/worker1.png",
+  "nome_no_codigo": "worker1",
+  "criado_em": "ST3-PT4"
+ },
+ "worker2.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/worker2.png",
+  "nome_no_codigo": "worker2",
+  "criado_em": "ST3-PT4"
+ },
+ "worker3.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/worker3.png",
+  "nome_no_codigo": "worker3",
+  "criado_em": "ST3-PT4"
+ },
+ "br_arabica.png": {
+  "categoria": "lavoura-e-clima",
+  "caminho": "biblioteca/lavoura-e-clima/br_arabica.png",
+  "nome_no_codigo": "arab",
+  "criado_em": "ST1-PT1"
+ },
+ "br_conilon.png": {
+  "categoria": "lavoura-e-clima",
+  "caminho": "biblioteca/lavoura-e-clima/br_conilon.png",
+  "nome_no_codigo": "coni",
+  "criado_em": "ST1-PT1"
+ },
+ "campo.png": {
+  "categoria": "lavoura-e-clima",
+  "caminho": "biblioteca/lavoura-e-clima/campo.png",
+  "nome_no_codigo": "campo",
+  "criado_em": "ST3-PT4"
+ },
+ "cloud.png": {
+  "categoria": "lavoura-e-clima",
+  "caminho": "biblioteca/lavoura-e-clima/cloud.png",
+  "nome_no_codigo": "cloud",
+  "criado_em": "ST1-PT4"
+ },
+ "coldfront.png": {
+  "categoria": "lavoura-e-clima",
+  "caminho": "biblioteca/lavoura-e-clima/coldfront.png",
+  "nome_no_codigo": "coldfront",
+  "criado_em": "ST3-PT2"
+ },
+ "field.png": {
+  "categoria": "lavoura-e-clima",
+  "caminho": "biblioteca/lavoura-e-clima/field.png",
+  "nome_no_codigo": "field",
+  "criado_em": "ST2-PT5"
+ },
+ "flake.png": {
+  "categoria": "lavoura-e-clima",
+  "caminho": "biblioteca/lavoura-e-clima/flake.png",
+  "nome_no_codigo": "flake",
+  "criado_em": "ST3-PT1"
+ },
+ "flower.png": {
+  "categoria": "lavoura-e-clima",
+  "caminho": "biblioteca/lavoura-e-clima/flower.png",
+  "nome_no_codigo": "flower",
+  "criado_em": "ST1-PT2"
+ },
+ "forest.png": {
+  "categoria": "lavoura-e-clima",
+  "caminho": "biblioteca/lavoura-e-clima/forest.png",
+  "nome_no_codigo": "forest",
+  "criado_em": "ST1-PT2"
+ },
+ "leaf0.png": {
+  "categoria": "lavoura-e-clima",
+  "caminho": "biblioteca/lavoura-e-clima/leaf0.png",
+  "nome_no_codigo": "leaf0",
+  "criado_em": "ST1-PT1"
+ },
+ "leaf1.png": {
+  "categoria": "lavoura-e-clima",
+  "caminho": "biblioteca/lavoura-e-clima/leaf1.png",
+  "nome_no_codigo": "leaf1",
+  "criado_em": "ST1-PT1"
+ },
+ "leaf2.png": {
+  "categoria": "lavoura-e-clima",
+  "caminho": "biblioteca/lavoura-e-clima/leaf2.png",
+  "nome_no_codigo": "leaf2",
+  "criado_em": "ST1-PT1"
+ },
+ "leaf3.png": {
+  "categoria": "lavoura-e-clima",
+  "caminho": "biblioteca/lavoura-e-clima/leaf3.png",
+  "nome_no_codigo": "leaf3",
+  "criado_em": "ST1-PT1"
+ },
+ "leaf4.png": {
+  "categoria": "lavoura-e-clima",
+  "caminho": "biblioteca/lavoura-e-clima/leaf4.png",
+  "nome_no_codigo": "leaf4",
+  "criado_em": "ST1-PT1"
+ },
+ "leaf5.png": {
+  "categoria": "lavoura-e-clima",
+  "caminho": "biblioteca/lavoura-e-clima/leaf5.png",
+  "nome_no_codigo": "leaf5",
+  "criado_em": "ST1-PT1"
+ },
+ "leaf6.png": {
+  "categoria": "lavoura-e-clima",
+  "caminho": "biblioteca/lavoura-e-clima/leaf6.png",
+  "nome_no_codigo": "leaf6",
+  "criado_em": "ST1-PT1"
+ },
+ "leaf7.png": {
+  "categoria": "lavoura-e-clima",
+  "caminho": "biblioteca/lavoura-e-clima/leaf7.png",
+  "nome_no_codigo": "leaf7",
+  "criado_em": "ST1-PT1"
+ },
+ "leafspot.png": {
+  "categoria": "lavoura-e-clima",
+  "caminho": "biblioteca/lavoura-e-clima/leafspot.png",
+  "nome_no_codigo": "leafspot",
+  "criado_em": "ST2-PT4"
+ },
+ "lowland.png": {
+  "categoria": "lavoura-e-clima",
+  "caminho": "biblioteca/lavoura-e-clima/lowland.png",
+  "nome_no_codigo": "low",
+  "criado_em": "ST1-PT1"
+ },
+ "mountains.png": {
+  "categoria": "lavoura-e-clima",
+  "caminho": "biblioteca/lavoura-e-clima/mountains.png",
+  "nome_no_codigo": "mount",
+  "criado_em": "ST1-PT1"
+ },
+ "rust.png": {
+  "categoria": "lavoura-e-clima",
+  "caminho": "biblioteca/lavoura-e-clima/rust.png",
+  "nome_no_codigo": "rust",
+  "criado_em": "ST1-PT2"
+ },
+ "seeds.png": {
+  "categoria": "lavoura-e-clima",
+  "caminho": "biblioteca/lavoura-e-clima/seeds.png",
+  "nome_no_codigo": "seeds",
+  "criado_em": "ST2-PT3"
+ },
+ "snow.png": {
+  "categoria": "lavoura-e-clima",
+  "caminho": "biblioteca/lavoura-e-clima/snow.png",
+  "nome_no_codigo": "snow",
+  "criado_em": "ST1-PT2"
+ },
+ "sprout.png": {
+  "categoria": "lavoura-e-clima",
+  "caminho": "biblioteca/lavoura-e-clima/sprout.png",
+  "nome_no_codigo": "sprout",
+  "criado_em": "ST1-PT2"
+ },
+ "sun.png": {
+  "categoria": "lavoura-e-clima",
+  "caminho": "biblioteca/lavoura-e-clima/sun.png",
+  "nome_no_codigo": "sun",
+  "criado_em": "ST1-PT1"
+ },
+ "tree.png": {
+  "categoria": "lavoura-e-clima",
+  "caminho": "biblioteca/lavoura-e-clima/tree.png",
+  "nome_no_codigo": "tree",
+  "criado_em": "ST2-PT5"
+ },
+ "waves.png": {
+  "categoria": "lavoura-e-clima",
+  "caminho": "biblioteca/lavoura-e-clima/waves.png",
+  "nome_no_codigo": "waves",
+  "criado_em": "ST1-PT1"
+ },
+ "worm.png": {
+  "categoria": "lavoura-e-clima",
+  "caminho": "biblioteca/lavoura-e-clima/worm.png",
+  "nome_no_codigo": "worm",
+  "criado_em": "ST3-PT2"
+ },
+ "brmap.png": {
+  "categoria": "mapas",
+  "caminho": "biblioteca/mapas/brmap.png",
+  "nome_no_codigo": "brmap",
+  "criado_em": "ST3-PT1"
+ },
+ "map2.png": {
+  "categoria": "mapas",
+  "caminho": "biblioteca/mapas/map2.png",
+  "nome_no_codigo": "map2",
+  "criado_em": "ST2-PT4"
+ },
+ "worldmap.png": {
+  "categoria": "mapas",
+  "caminho": "biblioteca/mapas/worldmap.png",
+  "nome_no_codigo": "worldmap",
+  "criado_em": "ST2-PT3"
+ },
+ "manicule.png": {
+  "categoria": "recortes-de-jornal",
+  "caminho": "biblioteca/recortes-de-jornal/manicule.png",
+  "nome_no_codigo": "hand",
+  "criado_em": "estilo 06-collage"
+ },
+ "news_a.png": {
+  "categoria": "recortes-de-jornal",
+  "caminho": "biblioteca/recortes-de-jornal/news_a.png",
+  "nome_no_codigo": "newsA",
+  "criado_em": "estilo 06-collage"
+ },
+ "news_b.png": {
+  "categoria": "recortes-de-jornal",
+  "caminho": "biblioteca/recortes-de-jornal/news_b.png",
+  "nome_no_codigo": "newsB",
+  "criado_em": "estilo 06-collage"
+ },
+ "space_wedge.png": {
+  "categoria": "recortes-de-jornal",
+  "caminho": "biblioteca/recortes-de-jornal/space_wedge.png",
+  "nome_no_codigo": "space",
+  "criado_em": "estilo 06-collage"
+ },
+ "logo.png": {
+  "categoria": "marca",
+  "caminho": "biblioteca/marca/logo.png",
+  "nome_no_codigo": "logo",
+  "criado_em": "ST1-PT4"
+ },
+ "bfly_a.png": {
+  "categoria": "extras-estilo-original",
+  "caminho": "biblioteca/extras-estilo-original/bfly_a.png",
+  "nome_no_codigo": null,
+  "criado_em": "estilo 06-collage"
+ },
+ "bfly_b.png": {
+  "categoria": "extras-estilo-original",
+  "caminho": "biblioteca/extras-estilo-original/bfly_b.png",
+  "nome_no_codigo": null,
+  "criado_em": "estilo 06-collage"
+ },
+ "bird_hawk.png": {
+  "categoria": "extras-estilo-original",
+  "caminho": "biblioteca/extras-estilo-original/bird_hawk.png",
+  "nome_no_codigo": null,
+  "criado_em": "estilo 06-collage"
+ },
+ "earth.png": {
+  "categoria": "extras-estilo-original",
+  "caminho": "biblioteca/extras-estilo-original/earth.png",
+  "nome_no_codigo": null,
+  "criado_em": "estilo 06-collage"
+ },
+ "flame0.png": {
+  "categoria": "extras-estilo-original",
+  "caminho": "biblioteca/extras-estilo-original/flame0.png",
+  "nome_no_codigo": null,
+  "criado_em": "estilo 06-collage"
+ },
+ "flame1.png": {
+  "categoria": "extras-estilo-original",
+  "caminho": "biblioteca/extras-estilo-original/flame1.png",
+  "nome_no_codigo": null,
+  "criado_em": "estilo 06-collage"
+ },
+ "rocket.png": {
+  "categoria": "extras-estilo-original",
+  "caminho": "biblioteca/extras-estilo-original/rocket.png",
+  "nome_no_codigo": null,
+  "criado_em": "estilo 06-collage"
+ },
+ "rose_centi.png": {
+  "categoria": "extras-estilo-original",
+  "caminho": "biblioteca/extras-estilo-original/rose_centi.png",
+  "nome_no_codigo": null,
+  "criado_em": "estilo 06-collage"
+ },
+ "rose_purple.png": {
+  "categoria": "extras-estilo-original",
+  "caminho": "biblioteca/extras-estilo-original/rose_purple.png",
+  "nome_no_codigo": null,
+  "criado_em": "estilo 06-collage"
+ },
+ "layout.json": {
+  "categoria": "personagens",
+  "caminho": "biblioteca/personagens/layout.json"
+ },
+ "astro.png": {
+  "categoria": "espaco",
+  "caminho": "biblioteca/espaco/astro.png",
+  "nome_no_codigo": "astro",
+  "criado_em": "CAFE-NO-ESPACO"
+ },
+ "astro2.png": {
+  "categoria": "espaco",
+  "caminho": "biblioteca/espaco/astro2.png",
+  "nome_no_codigo": "astro2",
+  "criado_em": "CAFE-NO-ESPACO"
+ },
+ "bg_space.png": {
+  "categoria": "espaco",
+  "caminho": "biblioteca/espaco/bg_space.png",
+  "nome_no_codigo": "bg_space",
+  "criado_em": "CAFE-NO-ESPACO"
+ },
+ "capsule.png": {
+  "categoria": "espaco",
+  "caminho": "biblioteca/espaco/capsule.png",
+  "nome_no_codigo": "capsule",
+  "criado_em": "CAFE-NO-ESPACO"
+ },
+ "clock.png": {
+  "categoria": "espaco",
+  "caminho": "biblioteca/espaco/clock.png",
+  "nome_no_codigo": "clock",
+  "criado_em": "CAFE-NO-ESPACO"
+ },
+ "coffeemaker.png": {
+  "categoria": "espaco",
+  "caminho": "biblioteca/espaco/coffeemaker.png",
+  "nome_no_codigo": "coffeemaker",
+  "criado_em": "CAFE-NO-ESPACO"
+ },
+ "drop0.png": {
+  "categoria": "espaco",
+  "caminho": "biblioteca/espaco/drop0.png",
+  "nome_no_codigo": "drop0",
+  "criado_em": "CAFE-NO-ESPACO"
+ },
+ "drop1.png": {
+  "categoria": "espaco",
+  "caminho": "biblioteca/espaco/drop1.png",
+  "nome_no_codigo": "drop1",
+  "criado_em": "CAFE-NO-ESPACO"
+ },
+ "drop2.png": {
+  "categoria": "espaco",
+  "caminho": "biblioteca/espaco/drop2.png",
+  "nome_no_codigo": "drop2",
+  "criado_em": "CAFE-NO-ESPACO"
+ },
+ "flask.png": {
+  "categoria": "espaco",
+  "caminho": "biblioteca/espaco/flask.png",
+  "nome_no_codigo": "flask",
+  "criado_em": "CAFE-NO-ESPACO"
+ },
+ "gear.png": {
+  "categoria": "espaco",
+  "caminho": "biblioteca/espaco/gear.png",
+  "nome_no_codigo": "gear",
+  "criado_em": "CAFE-NO-ESPACO"
+ },
+ "iss.png": {
+  "categoria": "espaco",
+  "caminho": "biblioteca/espaco/iss.png",
+  "nome_no_codigo": "iss",
+  "criado_em": "CAFE-NO-ESPACO"
+ },
+ "pouch.png": {
+  "categoria": "espaco",
+  "caminho": "biblioteca/espaco/pouch.png",
+  "nome_no_codigo": "pouch",
+  "criado_em": "CAFE-NO-ESPACO"
+ },
+ "socket.png": {
+  "categoria": "espaco",
+  "caminho": "biblioteca/espaco/socket.png",
+  "nome_no_codigo": "socket",
+  "criado_em": "CAFE-NO-ESPACO"
+ },
+ "spacemachine.png": {
+  "categoria": "espaco",
+  "caminho": "biblioteca/espaco/spacemachine.png",
+  "nome_no_codigo": "spacemachine",
+  "criado_em": "CAFE-NO-ESPACO"
+ },
+ "table.png": {
+  "categoria": "espaco",
+  "caminho": "biblioteca/espaco/table.png",
+  "nome_no_codigo": "table",
+  "criado_em": "CAFE-NO-ESPACO"
+ },
+ "bg_amazonia.png": {
+  "categoria": "amazonia",
+  "caminho": "biblioteca/amazonia/bg_amazonia.png",
+  "nome_no_codigo": "bg_amazonia",
+  "criado_em": "ARABICA-X-ROBUSTA"
+ },
+ "castanha.png": {
+  "categoria": "amazonia",
+  "caminho": "biblioteca/amazonia/castanha.png",
+  "nome_no_codigo": "castanha",
+  "criado_em": "ARABICA-X-ROBUSTA"
+ },
+ "chocolate.png": {
+  "categoria": "amazonia",
+  "caminho": "biblioteca/amazonia/chocolate.png",
+  "nome_no_codigo": "chocolate",
+  "criado_em": "ARABICA-X-ROBUSTA"
+ },
+ "frutas.png": {
+  "categoria": "amazonia",
+  "caminho": "biblioteca/amazonia/frutas.png",
+  "nome_no_codigo": "frutas",
+  "criado_em": "ARABICA-X-ROBUSTA"
+ },
+ "bathscale.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/bathscale.png",
+  "nome_no_codigo": "bathscale",
+  "criado_em": "CAFE-EMAGRECE"
+ },
+ "sugar.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/sugar.png",
+  "nome_no_codigo": "sugar",
+  "criado_em": "CAFE-EMAGRECE"
+ },
+ "bolt.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/bolt.png",
+  "nome_no_codigo": "bolt",
+  "criado_em": "CAFE-EMAGRECE"
+ },
+ "brain.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/brain.png",
+  "nome_no_codigo": "brain",
+  "criado_em": "CAFE-EMAGRECE"
+ },
+ "chamber.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/chamber.png",
+  "nome_no_codigo": "chamber",
+  "criado_em": "CAFE-EMAGRECE"
+ },
+ "latte.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/latte.png",
+  "nome_no_codigo": "latte",
+  "criado_em": "CAFE-EMAGRECE"
+ },
+ "body_thin.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/body_thin.png",
+  "nome_no_codigo": "body_thin",
+  "criado_em": "CAFE-EMAGRECE"
+ },
+ "body_wide.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/body_wide.png",
+  "nome_no_codigo": "body_wide",
+  "criado_em": "CAFE-EMAGRECE"
+ },
+ "flag_us.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/flag_us.png",
+  "nome_no_codigo": "flag_us",
+  "criado_em": "EP6-CHINA"
+ },
+ "flag_de.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/flag_de.png",
+  "nome_no_codigo": "flag_de",
+  "criado_em": "EP6-CHINA"
+ },
+ "flag_br.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/flag_br.png",
+  "nome_no_codigo": "flag_br",
+  "criado_em": "EP6-CHINA"
+ },
+ "gamepad.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/gamepad.png",
+  "nome_no_codigo": "gamepad",
+  "criado_em": "QUAL-CAFE-JASON"
+ },
+ "graf_queda.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/graf_queda.png",
+  "nome_no_codigo": "graf_queda",
+  "criado_em": "QUAL-CAFE-JASON"
+ },
+ "graf_alta.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/graf_alta.png",
+  "nome_no_codigo": "graf_alta",
+  "criado_em": "QUAL-CAFE-JASON"
+ },
+ "gta6logo.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/gta6logo.png",
+  "nome_no_codigo": "gta6logo",
+  "criado_em": "QUAL-CAFE-JASON"
+ },
+ "jason.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/jason.png",
+  "nome_no_codigo": "jason",
+  "criado_em": "QUAL-CAFE-JASON"
+ },
+ "pack_eu.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/pack_eu.png",
+  "nome_no_codigo": "pack_eu",
+  "criado_em": "ALEMANHA"
+ },
+ "beans_green.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/beans_green.png",
+  "nome_no_codigo": "beans_green",
+  "criado_em": "ALEMANHA"
+ },
+ "flag_it.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/flag_it.png",
+  "nome_no_codigo": "flag_it",
+  "criado_em": "EP6-CHINA"
+ },
+ "coffeecan.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/coffeecan.png",
+  "nome_no_codigo": "coffeecan",
+  "criado_em": "EP6-CHINA"
+ },
+ "beanmix.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/beanmix.png",
+  "nome_no_codigo": "beanmix",
+  "criado_em": "EXPRESSO-ITALIANO"
+ },
+ "jpflag.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/jpflag.png",
+  "nome_no_codigo": "jpflag",
+  "criado_em": "JAPAO"
+ },
+ "jpvending.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/jpvending.png",
+  "nome_no_codigo": "jpvending",
+  "criado_em": "JAPAO"
+ },
+ "jpcan.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/jpcan.png",
+  "nome_no_codigo": "jpcan",
+  "criado_em": "JAPAO"
+ },
+ "jpcafe.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/jpcafe.png",
+  "nome_no_codigo": "jpcafe",
+  "criado_em": "JAPAO"
+ },
+ "instant.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/instant.png",
+  "nome_no_codigo": "instant",
+  "criado_em": "JAPAO"
+ },
+ "flag_be.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/flag_be.png",
+  "nome_no_codigo": "flag_be",
+  "criado_em": "EP6-CHINA"
+ },
+ "porto.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/porto.png",
+  "nome_no_codigo": "porto",
+  "criado_em": "BELGICA"
+ },
+ "chart_up.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/chart_up.png",
+  "nome_no_codigo": "chart_up",
+  "criado_em": "BELGICA"
+ },
+ "estoque.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/estoque.png",
+  "nome_no_codigo": "estoque",
+  "criado_em": "BELGICA"
+ },
+ "flag_cn.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/flag_cn.png",
+  "nome_no_codigo": "flag_cn",
+  "criado_em": "EP6-CHINA"
+ },
+ "flag_jp.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/flag_jp.png",
+  "nome_no_codigo": "flag_jp",
+  "criado_em": "EP6-CHINA"
+ },
+ "luckin.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/luckin.png",
+  "nome_no_codigo": "luckin",
+  "criado_em": "EP6-CHINA"
+ },
+ "mapa_europa.png": {
+  "categoria": "mapas",
+  "caminho": "biblioteca/mapas/mapa_europa.png",
+  "nome_no_codigo": "mapa_europa",
+  "criado_em": "MAPAS-2026-11"
+ },
+ "mapa_asia.png": {
+  "categoria": "mapas",
+  "caminho": "biblioteca/mapas/mapa_asia.png",
+  "nome_no_codigo": "mapa_asia",
+  "criado_em": "MAPAS-2026-11"
+ },
+ "mapa_mundo.png": {
+  "categoria": "mapas",
+  "caminho": "biblioteca/mapas/mapa_mundo.png",
+  "nome_no_codigo": "mapa_mundo",
+  "criado_em": "MAPAS-2026-11"
+ },
+ "buque.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/buque.png",
+  "nome_no_codigo": "buque",
+  "criado_em": "CONTRABANDO"
+ },
+ "marco.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/marco.png",
+  "nome_no_codigo": "marco",
+  "criado_em": "CONTRABANDO"
+ },
+ "palheta.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/palheta.png",
+  "nome_no_codigo": "palheta",
+  "criado_em": "CONTRABANDO"
+ },
+ "livro.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/livro.png",
+  "nome_no_codigo": "livro",
+  "criado_em": "CONTRABANDO"
+ },
+ "pergaminho.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/pergaminho.png",
+  "nome_no_codigo": "pergaminho",
+  "criado_em": "CONTRABANDO"
+ },
+ "dama.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/dama.png",
+  "nome_no_codigo": "dama",
+  "criado_em": "CONTRABANDO"
+ },
+ "moedor.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/moedor.png",
+  "nome_no_codigo": "moedor",
+  "criado_em": "CAFE-ELETRICIDADE"
+ },
+ "grumos.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/grumos.png",
+  "nome_no_codigo": "grumos",
+  "criado_em": "CAFE-ELETRICIDADE"
+ },
+ "canal.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/canal.png",
+  "nome_no_codigo": "canal",
+  "criado_em": "CAFE-ELETRICIDADE"
+ },
+ "graosagua.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/graosagua.png",
+  "nome_no_codigo": "graosagua",
+  "criado_em": "CAFE-ELETRICIDADE"
+ },
+ "vulcao.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/vulcao.png",
+  "nome_no_codigo": "vulcao",
+  "criado_em": "CAFE-ELETRICIDADE"
+ },
+ "capacete.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/capacete.png",
+  "nome_no_codigo": "capacete",
+  "criado_em": "CAFE-ELETRICIDADE"
+ }
+}

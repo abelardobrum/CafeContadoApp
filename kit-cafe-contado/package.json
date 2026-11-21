@@ -1,0 +1,9 @@
+{
+  "name": "kit-colagem-animada",
+  "private": true,
+  "type": "module",
+  "description": "Kit de colagem animada para reels verticais, renderizado por código",
+  "dependencies": {
+    "puppeteer-core": "25.12.0"
+  }
+}

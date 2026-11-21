@@ -1,0 +1,396 @@
+"""Fluxo completo do Café Contado num só script (VM Linux ou Windows). São 3 passos + render:
+
+  1. cc.py novo <EP> --narracao n.mp3 --copy c.txt --musica m.mp3
+        checa dependências (instala o que faltar), copia os áudios e imprime palavra@tempo + DUR.
+  2. (escrever episodios/cafe-contado/<EP>/cenas.js e legenda.txt)
+     cc.py previa <EP>
+        valida cenas.js e legenda, monta, gera 1 quadro por cena (fim da cena) + a capa -> out/contato.jpg (UMA imagem).
+     cc.py ajustar <EP> trocas.txt
+        trocas "ANTIGO ==> NOVO" (uma por linha); aplica as que casam, lista as puladas, monta e
+        gera quadros SÓ das cenas alteradas (+ capa, se mexeu nela) -> out/contato.jpg.
+  3. cc.py finalizar <EP> "Título"
+        áudio (pula se já atualizado), capa, pasta final, RENDER.bat e checagem final.
+  Render: usuário dá 2 cliques em episodios\cafe-contado\<EP>\RENDER.bat.
+
+Comandos avulsos ainda existem: checar, montar, quadros <EP> t1,t2, audio, capa, entregar.
+
+cenas.js começa com:  // DUR:  // CTA:  // KEY:  // PECAS: apelido=arquivo ...
+depois scene(...) e function CAPA_SCENE() { scene(...) }.
+"""
+import argparse, glob, json, os, re, shutil, subprocess, sys, tempfile, unicodedata
+
+KIT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SERIE = os.path.join(KIT, 'episodios', 'cafe-contado')
+WIN = os.name == 'nt'
+
+
+def ep_dir(ep):
+    return os.path.join(SERIE, ep)
+
+
+def sh(*a, **k):
+    return subprocess.run(list(a), check=True, **k)
+
+
+# ---------------------------------------------------------------- ambiente
+def chrome_env():
+    """Chrome para o motor. Windows: o renderizar.bat acha sozinho. VM Linux: @sparticuz/chromium em ~/chr."""
+    env = dict(os.environ)
+    if WIN or env.get('MG_CHROME'):
+        return env
+    exe = os.path.expanduser('~/tmp/chromium')
+    if not os.path.exists(exe):
+        d = os.path.expanduser('~/chr'); os.makedirs(d, exist_ok=True)
+        if not os.path.exists(os.path.join(d, 'node_modules', '@sparticuz')):
+            sh('npm', 'init', '-y', cwd=d, stdout=subprocess.DEVNULL)
+            sh('npm', 'i', '@sparticuz/chromium', cwd=d, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        out = subprocess.run(['node', '-e', "import('@sparticuz/chromium').then(async m=>console.log(await m.default.executablePath()))"],
+                             cwd=d, capture_output=True, text=True).stdout.strip()
+        exe = out or exe
+    env['MG_CHROME'] = exe
+    env['MG_GPU_ARGS'] = '--no-sandbox --use-angle=swiftshader --no-zygote'
+    return env
+
+
+_PATCHED = []
+
+
+def patch_audio_tools():
+    if _PATCHED: return
+    _PATCHED.append(1)
+    """Correções do preparar_audio.py: mover entre discos e ffmpeg antigo (layout de canais)."""
+    _r = os.replace
+    def rep(a, b):
+        try: _r(a, b)
+        except OSError: shutil.copyfile(a, b)
+    os.replace = rep
+    _run = subprocess.run
+    AF = 'aformat=sample_fmts=dbl:sample_rates=48000:channel_layouts=stereo'
+    def run(args, *a, **k):
+        if isinstance(args, (list, tuple)):
+            args = [x.replace('[0:a]', f'[0:a]{AF},').replace('[1:a]', f'[1:a]{AF},').replace('[2:a]', f'[2:a]{AF},')
+                     .replace('[m][sc]', f'[m]{AF}[m2];[m2][sc]') if isinstance(x, str) and '[0:a]' in x else x for x in args]
+        return _run(args, *a, **k)
+    subprocess.run = run
+    os.remove_orig = os.remove
+    def rm(p):
+        try: os.remove_orig(p)
+        except OSError: pass
+    os.remove = rm
+
+
+def preparar_audio(*args):
+    import runpy
+    patch_audio_tools()
+    old = sys.argv
+    sys.argv = ['preparar_audio.py', *args]
+    cwd = os.getcwd(); os.chdir(KIT)
+    try:
+        runpy.run_path(os.path.join(KIT, 'ferramentas', 'preparar_audio.py'), run_name='__main__')
+    finally:
+        os.chdir(cwd); sys.argv = old
+
+
+
+# ---------------------------------------------------------------- dependências
+PIP = {'PIL': 'pillow', 'cv2': 'opencv-python', 'yaml': 'pyyaml', 'sklearn': 'scikit-learn'}
+STD = set(getattr(sys, 'stdlib_module_names', ())) | {'__future__'}
+
+
+def modulos_usados():
+    import ast
+    mods = {'numpy', 'PIL', 'soundfile'}
+    for f in ('preparar_audio.py', 'gerar_efeitos.py', 'alinhar_legendas.py', 'cc.py'):
+        try: tree = ast.parse(open(os.path.join(KIT, 'ferramentas', f), encoding='utf-8').read())
+        except (OSError, SyntaxError): continue
+        for n in ast.walk(tree):
+            if isinstance(n, ast.Import): mods |= {x.name.split('.')[0] for x in n.names}
+            elif isinstance(n, ast.ImportFrom) and n.module and not n.level: mods.add(n.module.split('.')[0])
+    return sorted(m for m in mods if m not in STD)
+
+
+def cmd_checar(a=None):
+    import importlib.util
+    falta = [m for m in modulos_usados() if importlib.util.find_spec(m) is None]
+    if falta:
+        pk = [PIP.get(m, m) for m in falta]
+        print('instalando:', ' '.join(pk))
+        extra = [] if WIN else ['--break-system-packages']
+        subprocess.run([sys.executable, '-m', 'pip', 'install', '--quiet', *extra, *pk], check=False)
+        falta = [m for m in falta if importlib.util.find_spec(m) is None]
+    bins = [b for b in ('ffmpeg', 'ffprobe', 'node') if not shutil.which(b)]
+    if falta or bins:
+        sys.exit(f'CHECAR FALHOU — python: {falta or "ok"} | programas: {bins or "ok"}')
+    print('checar ok (python, ffmpeg, node)')
+
+
+# ---------------------------------------------------------------- validação do cenas.js
+BUILTIN = {'newsA', 'newsB', 'hand', 'nface', 'njaw'}
+
+
+def lint_cenas(cen, pecas):
+    usados = set(re.findall(r"img:\s*'([^']+)'", cen))
+    sem = sorted(usados - set(pecas) - BUILTIN)
+    avisos = []
+    if sem: avisos.append(f'img sem declarar em PECAS: {sem}')
+    if cen.count('(') != cen.count(')') or cen.count('[') != cen.count(']') or cen.count('{') != cen.count('}'):
+        avisos.append('parênteses/colchetes/chaves desbalanceados')
+    for m in re.finditer(r"k:\s*'(tag|strip)'[^)]*?y:\s*(\d+)", cen):
+        if 1150 <= int(m.group(2)) <= 1350: avisos.append(f'{m.group(1)} em y {m.group(2)} (faixa da legenda 1150–1350)')
+    return avisos
+
+
+def render_valido(ep):
+    """MP4 de saida/ só vale se for mais novo que cenas.js, audio.flac e index.html do episódio."""
+    mp4 = os.path.join(KIT, 'saida', ep + '.mp4')
+    if not os.path.exists(mp4): return mp4, 'falta'
+    d = ep_dir(ep)
+    fontes = [os.path.join(d, f) for f in ('cenas.js', 'audio.flac', 'index.html') if os.path.exists(os.path.join(d, f))]
+    novo = max(os.path.getmtime(f) for f in fontes) if fontes else 0
+    return mp4, ('ok' if os.path.getmtime(mp4) > novo else 'antigo')
+
+# ---------------------------------------------------------------- comandos
+def cmd_novo(a):
+    cmd_checar()
+    d = ep_dir(a.ep); os.makedirs(os.path.join(d, 'out'), exist_ok=True)
+    shutil.copyfile(a.narracao, os.path.join(d, 'narr.mp3'))
+    if a.musica: shutil.copyfile(a.musica, os.path.join(d, 'musica.mp3'))
+    txt = open(a.copy, encoding='utf-8').read().strip()
+    open(os.path.join(d, 'roteiro.txt'), 'w', encoding='utf-8').write(txt + '\n')
+    preparar_audio(os.path.relpath(d, KIT), '--so-legendas')
+    w = json.load(open(os.path.join(d, 'words.json'), encoding='utf-8'))
+    w = w if isinstance(w, list) else w.get('words', w)
+    print(' '.join(f"{x['w']}@{x['s']:.1f}" for x in w))
+    print(f"FIM_NARRACAO {w[-1]['e']:.2f}  ->  DUR sugerido {w[-1]['e'] + 1.4:.1f}")
+
+
+ATALHOS = """
+// ---- atalhos do cc.py (padrões da casa; qualquer campo pode ser sobrescrito em o)
+const _n = (i, o) => (i === 0 && !('anim' in o) ? { anim: 'none' } : {});
+const _fg = (bg) => (bg === INK || bg === RED ? CREAM : INK);
+const RAN = (text, x, y, size, i, o = {}) => E({ k: 'ransom', text, x, y, size, r: -3, in: i, per: i === 0 ? undefined : 'letter', pal: ['cream', 'ink', 'red', 'news'], fonts: 2, ..._n(i, o), ...o });
+const TAG = (text, x, y, size, i, bg = GOLD, o = {}) => E({ k: 'tag', text, x, y, size, bg, fg: _fg(bg), r: -2, in: i, ..._n(i, o), ...o });
+const FAI = (text, x, y, size, i, bg = INK, o = {}) => E({ k: 'strip', text, w: Math.round(text.length * size * 0.56 + 90), h: Math.round(size * 1.5), size, x, y, r: -2, in: i, bg, fg: _fg(bg), font: 'Anton', anim: 'slideL', ..._n(i, o), ...o });
+const FIG = (img, x, y, s, i, o = {}) => E({ k: 'img', img, x, y, s, r: 0, in: i, ..._n(i, o), ...o });
+const SEL = (text, x, y, R, i, o = {}) => E({ k: 'stamp', text, x, y, R, r: 10, in: i, fill: CREAM, ..._n(i, o), ...o });
+"""
+
+
+def cmd_montar(a):
+    d = ep_dir(a.ep)
+    cen = open(os.path.join(d, 'cenas.js'), encoding='utf-8').read()
+    head = dict(re.findall(r'^// (DUR|CTA|KEY|PECAS|SELO):\s*(.*)$', cen, flags=re.M))
+    for k in ('DUR', 'CTA', 'KEY', 'PECAS'):
+        assert k in head, f'cabeçalho // {k}: faltando no cenas.js'
+    pecas = dict(p.split('=') for p in head['PECAS'].split())
+    key = [k.strip().lower() for k in head['KEY'].split(',') if k.strip()]
+    s = open(os.path.join(KIT, 'modelos', 'cafe-contado', 'index.html'), encoding='utf-8').read()
+    s = (s.replace('/*DUR*/60', head['DUR']).replace('/*CTA*/999', head['CTA'])
+          .replace('/*PECAS*/{}', json.dumps(pecas)).replace('/*KEY*/[]', json.dumps(key, ensure_ascii=False))
+          .replace('/*CENAS*/', ATALHOS + ('' if re.search(r'\b(const|let|var)\s+CTA\b', cen) else f"const CTA = {head['CTA']};\n") + cen).replace('Café Contado · episódio', 'Café Contado · ' + a.ep))
+    if head.get('SELO', '').strip():
+        s = s.replace("fillText('CURIOSIDADE'", 'fillText(' + json.dumps(head['SELO'].strip(), ensure_ascii=False))
+    open(os.path.join(d, 'index.html'), 'w', encoding='utf-8').write(s)
+    lib = json.load(open(os.path.join(KIT, 'biblioteca', 'indice.json'), encoding='utf-8'))
+    falta = [f for f in pecas.values() if f + '.png' not in lib]
+    avisos = lint_cenas(cen, pecas) + ([f'peças inexistentes: {falta}'] if falta else [])
+    print('index.html ok' + ''.join('\n  ATENÇÃO ' + x for x in avisos))
+
+
+def stills(d, ts, scale, query=None):
+    args = ['node', os.path.join(KIT, 'motor', 'render.mjs'), d, '--stills', ts, '--scale', str(scale)]
+    if query: args += ['--query', query]
+    r = subprocess.run(args, env=chrome_env(), cwd=KIT, capture_output=True, text=True)
+    err = [l for l in (r.stdout + r.stderr).splitlines() if 'error' in l.lower()]
+    if err: print('\n'.join(err[:5]))
+
+
+def cmd_quadros(a):
+    from PIL import Image
+    d = ep_dir(a.ep)
+    stills(d, a.tempos, 0.3)
+    ims = [Image.open(os.path.join(d, 'out', 'stills', f't{float(t):05.2f}.png')) for t in a.tempos.split(',')]
+    w, h = ims[0].size; cols = min(8, len(ims)); rows = (len(ims) + cols - 1) // cols
+    S = Image.new('RGB', (w * cols, h * rows), 'white')
+    for i, im in enumerate(ims): S.paste(im, ((i % cols) * w, (i // cols) * h))
+    S.save(os.path.join(d, 'out', 'contato.jpg'), quality=80)
+    print('out/contato.jpg', len(ims), 'quadros')
+
+
+def audio_atual(d, mus):
+    f = os.path.join(d, 'audio.flac')
+    if not os.path.exists(f): return False
+    deps = [os.path.join(d, x) for x in ('narr.mp3', 'cenas.js')] + ([mus] if mus else [])
+    return all(os.path.getmtime(f) > os.path.getmtime(x) for x in deps if os.path.exists(x))
+
+
+def cmd_audio(a):
+    d = ep_dir(a.ep)
+    a.musica = a.musica or (os.path.join(d, 'musica.mp3') if os.path.exists(os.path.join(d, 'musica.mp3')) else None)
+    if not a.musica: sys.exit('ÁUDIO: falta a música (cc.py novo ... --musica m.mp3 ou cc.py audio <EP> --musica m.mp3)')
+    if audio_atual(d, a.musica) and not getattr(a, 'forcar', False):
+        print('audio.flac já atualizado (pulado)'); return
+    args = [os.path.relpath(d, KIT)]
+    if a.musica:
+        wav = os.path.join(d, 'out', 'musica.wav')
+        sh('ffmpeg', '-v', 'error', '-y', '-i', a.musica, '-map', '0:a', '-ar', '48000', '-ac', '2', wav)
+        args += ['--musica', wav]
+    preparar_audio(*args)
+    r = subprocess.run(['ffmpeg', '-hide_banner', '-i', os.path.join(d, 'audio.flac'), '-af', 'ebur128=peak=true', '-f', 'null', '-'],
+                       capture_output=True, text=True).stderr
+    print('audio.flac ok |', ' '.join(re.findall(r'(I:\s+[-\d.]+ LUFS|Peak:\s+[-\d.]+ dBFS)', r)[-2:]))
+
+
+def cmd_capa(a):
+    from PIL import Image
+    d = ep_dir(a.ep)
+    stills(d, '1', 1, 'capa=1')
+    src = os.path.join(d, 'out', 'stills', 't01.00.png')
+    Image.open(src).convert('RGB').save(os.path.join(d, 'out', 'capa.jpg'), quality=93)
+    print('out/capa.jpg ok')
+
+
+def pasta_nome(titulo):
+    t = re.sub(r'[<>:"/\\|?*]', ' -', titulo).replace(' - -', ' -')
+    return re.sub(r'\s+', ' ', re.sub(r'\s-\s*$', '', t)).strip().rstrip('.')
+
+
+def cmd_entregar(a):
+    d = ep_dir(a.ep)
+    dest = os.path.join(a.destino or SERIE, pasta_nome(a.titulo))
+    os.makedirs(dest, exist_ok=True)
+    shutil.copyfile(os.path.join(d, 'out', 'capa.jpg'), os.path.join(dest, 'capa.jpg'))
+    shutil.copyfile(os.path.join(d, 'legenda.txt'), os.path.join(dest, 'legenda.txt'))
+    mp4, st = render_valido(a.ep)
+    final = os.path.join(dest, pasta_nome(a.titulo) + '.mp4')
+    if st == 'ok':
+        shutil.copyfile(mp4, final)
+    elif os.path.exists(final):
+        nome = final[:-4] + '-ANTIGO.mp4'
+        try:
+            os.replace(final, nome)  # nunca deixar vídeo velho com o nome final
+            print('  vídeo antigo na pasta final renomeado para', os.path.basename(nome))
+        except OSError:
+            print('  ATENÇÃO: há um vídeo ANTIGO na pasta final; o RENDER.bat vai sobrescrevê-lo')
+    open(os.path.join(d, 'destino.txt'), 'w', encoding='utf-8').write(os.path.relpath(dest, KIT).replace('/', '\\'))
+    open(os.path.join(d, 'RENDER.bat'), 'w', newline='\r\n').write(f'@echo off\ncall "%~dp0..\\..\\..\\RENDER-CAFE.bat" "{a.ep}"\n')
+    msg = {'ok': 'ok (render atual)',
+           'falta': 'falta renderizar',
+           'antigo': 'saida/' + a.ep + '.mp4 é ANTERIOR à última edição -> NÃO copiado; falta renderizar'}[st]
+    print('entregue em', dest, '| vídeo:', msg + ('' if st == 'ok' else ': 2 cliques em episodios\\cafe-contado\\' + a.ep + '\\RENDER.bat'))
+
+# ---------------------------------------------------------------- fluxo encadeado
+def cenas_info(cen):
+    """[(inicio, fim, pos)] das cenas (fora da CAPA_SCENE) e DUR."""
+    dur = float(re.search(r'^// DUR:\s*([\d.]+)', cen, re.M).group(1))
+    corpo = cen.split('function CAPA_SCENE')[0]
+    out = []
+    cta = float(re.search(r'^// CTA:\s*([\d.]+)', cen, re.M).group(1))
+    for m in re.finditer(r"scene\(\s*'\w+'\s*,\s*([\d.]+|CTA)\s*,\s*([\d.]+|DUR\s*\+\s*[\d.]+)", corpo):
+        fim = dur if 'DUR' in m.group(2) else float(m.group(2))
+        ini = cta if m.group(1) == 'CTA' else float(m.group(1))
+        out.append((ini, fim, m.start()))
+    return out, dur
+
+
+def t_quadro(ini, fim):
+    return round(max(ini + 0.1, fim - 0.25), 2)
+
+
+def lint_legenda(d):
+    p = os.path.join(d, 'legenda.txt')
+    if not os.path.exists(p): return ['legenda.txt não existe']
+    txt = open(p, encoding='utf-8').read()
+    tags = re.findall(r'#\w+', txt)
+    av = []
+    if len(tags) != 5: av.append(f'legenda com {len(tags)} hashtags (precisa 5)')
+    if '#CafeContado' not in tags: av.append('legenda sem #CafeContado')
+    return av
+
+
+def contato(d, tempos, com_capa):
+    from PIL import Image
+    ims = [Image.open(os.path.join(d, 'out', 'stills', f't{t:05.2f}.png')) for t in tempos]
+    if com_capa:
+        c = Image.open(os.path.join(d, 'out', 'capa.jpg')); ims.append(c.resize(ims[0].size if ims else (324, 576)))
+    w, h = ims[0].size; cols = min(8, len(ims)); rows = (len(ims) + cols - 1) // cols
+    S = Image.new('RGB', (w * cols, h * rows), 'white')
+    for i, im in enumerate(ims): S.paste(im, ((i % cols) * w, (i // cols) * h))
+    S.save(os.path.join(d, 'out', 'contato.jpg'), quality=80)
+    print(f'out/contato.jpg: {len(tempos)} cenas ({", ".join(map(str, tempos))})' + (' + capa (último quadro)' if com_capa else ''))
+
+
+def previa_de(a, tempos, com_capa):
+    d = ep_dir(a.ep)
+    cmd_montar(a)
+    for x in lint_legenda(d): print('  ATENÇÃO', x)
+    if tempos: stills(d, ','.join(map(str, tempos)), 0.3)
+    if com_capa: cmd_capa(a)
+    contato(d, tempos, com_capa)
+
+
+def cmd_previa(a):
+    cen = open(os.path.join(ep_dir(a.ep), 'cenas.js'), encoding='utf-8').read()
+    cenas, _ = cenas_info(cen)
+    previa_de(a, [t_quadro(i, f) for i, f, _ in cenas], True)
+
+
+def cmd_ajustar2(a):
+    d = ep_dir(a.ep); p = os.path.join(d, 'cenas.js')
+    s = open(p, encoding='utf-8').read()
+    ok, nao, posicoes = 0, [], []
+    for ln in open(a.trocas, encoding='utf-8').read().splitlines():
+        if '==>' not in ln: continue
+        old, new = (x.strip() for x in ln.split('==>', 1))
+        n = s.count(old)
+        if n == 1:
+            i = s.index(old); s = s[:i] + new + s[i + len(old):]; ok += 1; posicoes.append(i)
+        else: nao.append(f'{"não encontrado" if n == 0 else f"{n} ocorrências"}: {old}')
+    open(p, 'w', encoding='utf-8').write(s)
+    print(f'ajustar: {ok} trocas aplicadas' + ''.join('\n  PULADA ' + x for x in nao))
+    if not ok: return
+    cenas, _ = cenas_info(s)
+    capa_pos = s.find('function CAPA_SCENE')
+    tempos, com_capa = set(), False
+    for pos in posicoes:
+        if capa_pos >= 0 and pos > capa_pos: com_capa = True; continue
+        antes = [c for c in cenas if c[2] <= pos]
+        if antes: tempos.add(t_quadro(antes[-1][0], antes[-1][1]))
+    if a.quadros: tempos |= {float(t) for t in a.quadros.split(',')}
+    previa_de(a, sorted(tempos), com_capa)
+
+
+def cmd_finalizar(a):
+    d = ep_dir(a.ep)
+    cen = open(os.path.join(d, 'cenas.js'), encoding='utf-8').read()
+    _, dur = cenas_info(cen)
+    erros = lint_legenda(d)
+    if erros: sys.exit('FINALIZAR parado: ' + '; '.join(erros))
+    a.musica = None; cmd_montar(a); cmd_audio(a); cmd_capa(a); cmd_entregar(a)
+    from PIL import Image
+    dest = os.path.join(a.destino or SERIE, pasta_nome(a.titulo))
+    prob = []
+    fl = os.path.join(d, 'audio.flac')
+    r = subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', fl], capture_output=True, text=True).stdout.strip()
+    if not r or abs(float(r) - dur) > 0.6: prob.append(f'audio.flac {r or "?"} s x DUR {dur}')
+    for f in ('capa.jpg', 'legenda.txt'):
+        if not os.path.exists(os.path.join(dest, f)): prob.append(f'falta {f} na pasta final')
+    if os.path.exists(os.path.join(dest, 'capa.jpg')) and Image.open(os.path.join(dest, 'capa.jpg')).size != (1080, 1920): prob.append('capa fora de 1080x1920')
+    extras = [f for f in os.listdir(dest) if f not in ('capa.jpg', 'legenda.txt', pasta_nome(a.titulo) + '.mp4')]
+    if extras: prob.append(f'arquivos extras na pasta final: {extras}')
+    print('FINALIZAR ' + ('ok' if not prob else 'COM PROBLEMAS: ' + '; '.join(prob)))
+
+
+p = argparse.ArgumentParser()
+sp = p.add_subparsers(dest='c', required=True)
+x = sp.add_parser('checar'); x.set_defaults(f=cmd_checar)
+x = sp.add_parser('ajustar'); x.add_argument('ep'); x.add_argument('trocas'); x.add_argument('--quadros'); x.set_defaults(f=cmd_ajustar2)
+x = sp.add_parser('novo'); x.add_argument('ep'); x.add_argument('--narracao', required=True); x.add_argument('--copy', required=True); x.add_argument('--musica'); x.set_defaults(f=cmd_novo)
+x = sp.add_parser('montar'); x.add_argument('ep'); x.set_defaults(f=cmd_montar)
+x = sp.add_parser('quadros'); x.add_argument('ep'); x.add_argument('tempos'); x.set_defaults(f=cmd_quadros)
+x = sp.add_parser('audio'); x.add_argument('ep'); x.add_argument('--musica'); x.add_argument('--forcar', action='store_true'); x.set_defaults(f=cmd_audio)
+x = sp.add_parser('capa'); x.add_argument('ep'); x.set_defaults(f=cmd_capa)
+x = sp.add_parser('previa'); x.add_argument('ep'); x.set_defaults(f=cmd_previa)
+x = sp.add_parser('finalizar'); x.add_argument('ep'); x.add_argument('titulo'); x.add_argument('--destino'); x.set_defaults(f=cmd_finalizar)
+x = sp.add_parser('entregar'); x.add_argument('ep'); x.add_argument('titulo'); x.add_argument('--destino'); x.set_defaults(f=cmd_entregar)
+a = p.parse_args(); a.f(a)

@@ -1,0 +1,190 @@
+"""Fluxo completo do Café Contado num só script (roda na VM Linux ou no Windows).
+
+  python3 ferramentas/cc.py novo <EP> --narracao a.mp3 --copy copy.txt   cria o episódio e imprime palavra@tempo
+  python3 ferramentas/cc.py montar <EP>                                 cenas.js -> index.html (usa modelos/cafe-contado)
+  python3 ferramentas/cc.py quadros <EP> 2,10,30 [--capa]               stills 0.3 + out/contato.jpg (8 por linha)
+  python3 ferramentas/cc.py audio <EP> --musica m.mp3                   mixa voz+música(ducking)+efeitos -> audio.flac
+  python3 ferramentas/cc.py capa <EP>                                   out/capa.jpg 1080x1920 (usa CAPA_SCENE do cenas.js)
+  python3 ferramentas/cc.py entregar <EP> "Título do vídeo"             pasta final com capa.jpg + legenda.txt (+ vídeo, se já existir)
+
+cenas.js do episódio começa com o cabeçalho:
+  // DUR: 112.0            (fim da narração + ~1,4 s)
+  // CTA: 106.15           (tempo em que as legendas somem para o CTA)
+  // KEY: arábica, robusta, 2024     (palavras com fita vermelha)
+  // PECAS: arab=br_arabica coni=br_conilon cup=cup   (nome_no_codigo=arquivo sem .png)
+e depois as chamadas scene(...) e, opcional, function CAPA_SCENE() { scene(...) }.
+"""
+import argparse, glob, json, os, re, shutil, subprocess, sys, tempfile, unicodedata
+
+KIT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SERIE = os.path.join(KIT, 'episodios', 'cafe-contado')
+WIN = os.name == 'nt'
+
+
+def ep_dir(ep):
+    return os.path.join(SERIE, ep)
+
+
+def sh(*a, **k):
+    return subprocess.run(list(a), check=True, **k)
+
+
+# ---------------------------------------------------------------- ambiente
+def chrome_env():
+    """Chrome para o motor. Windows: o renderizar.bat acha sozinho. VM Linux: @sparticuz/chromium em ~/chr."""
+    env = dict(os.environ)
+    if WIN or env.get('MG_CHROME'):
+        return env
+    exe = os.path.expanduser('~/tmp/chromium')
+    if not os.path.exists(exe):
+        d = os.path.expanduser('~/chr'); os.makedirs(d, exist_ok=True)
+        if not os.path.exists(os.path.join(d, 'node_modules', '@sparticuz')):
+            sh('npm', 'init', '-y', cwd=d, stdout=subprocess.DEVNULL)
+            sh('npm', 'i', '@sparticuz/chromium', cwd=d, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        out = subprocess.run(['node', '-e', "import('@sparticuz/chromium').then(async m=>console.log(await m.default.executablePath()))"],
+                             cwd=d, capture_output=True, text=True).stdout.strip()
+        exe = out or exe
+    env['MG_CHROME'] = exe
+    env['MG_GPU_ARGS'] = '--no-sandbox --use-angle=swiftshader --no-zygote'
+    return env
+
+
+_PATCHED = []
+
+
+def patch_audio_tools():
+    if _PATCHED: return
+    _PATCHED.append(1)
+    """Correções do preparar_audio.py: mover entre discos e ffmpeg antigo (layout de canais)."""
+    _r = os.replace
+    def rep(a, b):
+        try: _r(a, b)
+        except OSError: shutil.copyfile(a, b)
+    os.replace = rep
+    _run = subprocess.run
+    AF = 'aformat=sample_fmts=dbl:sample_rates=48000:channel_layouts=stereo'
+    def run(args, *a, **k):
+        if isinstance(args, (list, tuple)):
+            args = [x.replace('[0:a]', f'[0:a]{AF},').replace('[1:a]', f'[1:a]{AF},').replace('[2:a]', f'[2:a]{AF},')
+                     .replace('[m][sc]', f'[m]{AF}[m2];[m2][sc]') if isinstance(x, str) and '[0:a]' in x else x for x in args]
+        return _run(args, *a, **k)
+    subprocess.run = run
+    os.remove_orig = os.remove
+    def rm(p):
+        try: os.remove_orig(p)
+        except OSError: pass
+    os.remove = rm
+
+
+def preparar_audio(*args):
+    import runpy
+    patch_audio_tools()
+    old = sys.argv
+    sys.argv = ['preparar_audio.py', *args]
+    cwd = os.getcwd(); os.chdir(KIT)
+    try:
+        runpy.run_path(os.path.join(KIT, 'ferramentas', 'preparar_audio.py'), run_name='__main__')
+    finally:
+        os.chdir(cwd); sys.argv = old
+
+
+# ---------------------------------------------------------------- comandos
+def cmd_novo(a):
+    d = ep_dir(a.ep); os.makedirs(os.path.join(d, 'out'), exist_ok=True)
+    shutil.copyfile(a.narracao, os.path.join(d, 'narr.mp3'))
+    txt = open(a.copy, encoding='utf-8').read().strip()
+    open(os.path.join(d, 'roteiro.txt'), 'w', encoding='utf-8').write(txt + '\n')
+    preparar_audio(os.path.relpath(d, KIT), '--so-legendas')
+    w = json.load(open(os.path.join(d, 'words.json'), encoding='utf-8'))
+    w = w if isinstance(w, list) else w.get('words', w)
+    print(' '.join(f"{x['w']}@{x['s']:.1f}" for x in w))
+    print(f"FIM_NARRACAO {w[-1]['e']:.2f}  ->  DUR sugerido {w[-1]['e'] + 1.4:.1f}")
+
+
+def cmd_montar(a):
+    d = ep_dir(a.ep)
+    cen = open(os.path.join(d, 'cenas.js'), encoding='utf-8').read()
+    head = dict(re.findall(r'^// (DUR|CTA|KEY|PECAS):\s*(.*)$', cen, flags=re.M))
+    for k in ('DUR', 'CTA', 'KEY', 'PECAS'):
+        assert k in head, f'cabeçalho // {k}: faltando no cenas.js'
+    pecas = dict(p.split('=') for p in head['PECAS'].split())
+    key = [k.strip().lower() for k in head['KEY'].split(',') if k.strip()]
+    s = open(os.path.join(KIT, 'modelos', 'cafe-contado', 'index.html'), encoding='utf-8').read()
+    s = (s.replace('/*DUR*/60', head['DUR']).replace('/*CTA*/999', head['CTA'])
+          .replace('/*PECAS*/{}', json.dumps(pecas)).replace('/*KEY*/[]', json.dumps(key, ensure_ascii=False))
+          .replace('/*CENAS*/', cen).replace('Café Contado · episódio', 'Café Contado · ' + a.ep))
+    open(os.path.join(d, 'index.html'), 'w', encoding='utf-8').write(s)
+    lib = json.load(open(os.path.join(KIT, 'biblioteca', 'indice.json'), encoding='utf-8'))
+    falta = [f for f in pecas.values() if f + '.png' not in lib]
+    print('index.html ok' + (f'  ATENÇÃO peças inexistentes: {falta}' if falta else ''))
+
+
+def stills(d, ts, scale, query=None):
+    args = ['node', os.path.join(KIT, 'motor', 'render.mjs'), d, '--stills', ts, '--scale', str(scale)]
+    if query: args += ['--query', query]
+    r = subprocess.run(args, env=chrome_env(), cwd=KIT, capture_output=True, text=True)
+    err = [l for l in (r.stdout + r.stderr).splitlines() if 'error' in l.lower()]
+    if err: print('\n'.join(err[:5]))
+
+
+def cmd_quadros(a):
+    from PIL import Image
+    d = ep_dir(a.ep)
+    stills(d, a.tempos, 0.3)
+    ims = [Image.open(os.path.join(d, 'out', 'stills', f't{float(t):05.2f}.png')) for t in a.tempos.split(',')]
+    w, h = ims[0].size; cols = min(8, len(ims)); rows = (len(ims) + cols - 1) // cols
+    S = Image.new('RGB', (w * cols, h * rows), 'white')
+    for i, im in enumerate(ims): S.paste(im, ((i % cols) * w, (i // cols) * h))
+    S.save(os.path.join(d, 'out', 'contato.jpg'), quality=80)
+    print('out/contato.jpg', len(ims), 'quadros')
+
+
+def cmd_audio(a):
+    d = ep_dir(a.ep)
+    args = [os.path.relpath(d, KIT)]
+    if a.musica:
+        wav = os.path.join(d, 'out', 'musica.wav')
+        sh('ffmpeg', '-v', 'error', '-y', '-i', a.musica, '-map', '0:a', '-ar', '48000', '-ac', '2', wav)
+        args += ['--musica', wav]
+    preparar_audio(*args)
+    r = subprocess.run(['ffmpeg', '-hide_banner', '-i', os.path.join(d, 'audio.flac'), '-af', 'ebur128=peak=true', '-f', 'null', '-'],
+                       capture_output=True, text=True).stderr
+    print('audio.flac ok |', ' '.join(re.findall(r'(I:\s+[-\d.]+ LUFS|Peak:\s+[-\d.]+ dBFS)', r)[-2:]))
+
+
+def cmd_capa(a):
+    from PIL import Image
+    d = ep_dir(a.ep)
+    stills(d, '1', 1, 'capa=1')
+    Image.open(os.path.join(d, 'out', 'stills', 't01.00.png')).convert('RGB').save(os.path.join(d, 'out', 'capa.jpg'), quality=93)
+    print('out/capa.jpg ok')
+
+
+def pasta_nome(titulo):
+    t = re.sub(r'[<>:"/\\|?*]', ' -', titulo).replace(' - -', ' -')
+    return re.sub(r'\s+', ' ', re.sub(r'\s-\s*$', '', t)).strip().rstrip('.')
+
+
+def cmd_entregar(a):
+    d = ep_dir(a.ep)
+    dest = os.path.join(a.destino or SERIE, pasta_nome(a.titulo))
+    os.makedirs(dest, exist_ok=True)
+    shutil.copyfile(os.path.join(d, 'out', 'capa.jpg'), os.path.join(dest, 'capa.jpg'))
+    shutil.copyfile(os.path.join(d, 'legenda.txt'), os.path.join(dest, 'legenda.txt'))
+    mp4 = os.path.join(KIT, 'saida', a.ep + '.mp4')
+    if os.path.exists(mp4):
+        shutil.copyfile(mp4, os.path.join(dest, pasta_nome(a.titulo) + '.mp4'))
+    open(os.path.join(d, 'destino.txt'), 'w', encoding='utf-8').write(os.path.relpath(dest, KIT).replace('/', '\\'))
+    open(os.path.join(d, 'RENDER.bat'), 'w', newline='\r\n').write(f'@echo off\ncall "%~dp0..\\..\\..\\RENDER-CAFE.bat" {a.ep}\n')
+    print('entregue em', dest, '| vídeo:', 'ok' if os.path.exists(mp4) else 'falta renderizar: 2 cliques em episodios\\cafe-contado\\' + a.ep + '\\RENDER.bat')
+
+
+p = argparse.ArgumentParser()
+sp = p.add_subparsers(dest='c', required=True)
+x = sp.add_parser('novo'); x.add_argument('ep'); x.add_argument('--narracao', required=True); x.add_argument('--copy', required=True); x.set_defaults(f=cmd_novo)
+x = sp.add_parser('montar'); x.add_argument('ep'); x.set_defaults(f=cmd_montar)
+x = sp.add_parser('quadros'); x.add_argument('ep'); x.add_argument('tempos'); x.set_defaults(f=cmd_quadros)
+x = sp.add_parser('audio'); x.add_argument('ep'); x.add_argument('--musica'); x.set_defaults(f=cmd_audio)
+x = sp.add_parser('capa'); x.add_argument('ep'); x.set_defaults(f=cmd_capa)
+x = sp.add_parser('entregar'); x.add_argument('ep'); x.add_argument('titulo'); x.add_argument('--destino'); x.set_defaults(f=cmd_entregar)
+a = p.parse_args(); a.f(a)

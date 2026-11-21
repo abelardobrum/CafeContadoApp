@@ -1,0 +1,10 @@
+node_modules/
+saida/*
+episodios/*/*/out/
+motor/tools/
+*.mp4
+__pycache__/
+# seus episódios ficam fora do repositório; só o exemplo é versionado
+episodios/*
+!episodios/exemplos/
+entrada/*
