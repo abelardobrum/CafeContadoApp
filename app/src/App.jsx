@@ -4,6 +4,7 @@ import Config from './Config.jsx';
 const SELOS = ['EP.1', 'EP.2', 'EP.3', 'EP.4', 'EP.5', 'CURIOSIDADE', 'NENHUM'];
 const FASES = [
   ['claude', 'Claude montando as cenas'],
+  ['confirmar', 'Aguardando sua confirmação para renderizar'],
   ['render', 'Renderizando o vídeo'],
   ['pronto', 'Entregue em saida/'],
 ];
@@ -139,7 +140,10 @@ function Formulario({ ocupado, semClaude, onIrConfig, onCriado }) {
 
       <label className="check">
         <input type="checkbox" checked={renderizar} onChange={(e) => setRenderizar(e.target.checked)} />
-        Renderizar o MP4 no final (~8 min)
+        <span>
+          Renderização automática (~8 min)
+          <em>{renderizar ? 'renderiza o MP4 logo depois que o Claude finaliza' : 'pede sua confirmação antes de começar a renderizar'}</em>
+        </span>
       </label>
 
       {erro && <p className="aviso">{erro}</p>}
@@ -193,7 +197,7 @@ function Painel({ jobId, onFim }) {
       const ev = JSON.parse(m.data);
       if (ev.tipo === 'estado') {
         setJob(ev);
-        if (ev.status !== 'rodando') onFim();
+        if (ev.status !== 'rodando' && ev.status !== 'aguardando') onFim();
       } else if (ev.tipo === 'previa') {
         setPrevia(Date.now());
       } else if (ev.tipo === 'progresso') {
@@ -215,7 +219,7 @@ function Painel({ jobId, onFim }) {
         <ol>
           <li>Os arquivos vão para <code>entrada/&lt;slug&gt;/</code> do kit.</li>
           <li>O Claude segue o <code>CAFE-CONTADO.md</code>: cria o episódio, escreve as cenas, confere a prévia e finaliza.</li>
-          <li>O app renderiza e entrega em <code>saida/&lt;Selo&gt; - &lt;Título&gt;/</code> (MP4, capa e legenda).</li>
+          <li>Com a renderização automática marcada, o app já renderiza; desmarcada, ele pergunta antes. Entrega em <code>saida/&lt;Selo&gt; - &lt;Título&gt;/</code> (MP4, capa e legenda).</li>
         </ol>
       </section>
     );
@@ -224,6 +228,10 @@ function Painel({ jobId, onFim }) {
   const fase = job?.fase || 'claude';
   const idx = FASES.findIndex(([f]) => f === fase);
   const rodando = job?.status === 'rodando';
+  const aguardando = job?.status === 'aguardando';
+  const decidir = (renderizar) => fetch(`/api/jobs/${jobId}/render`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ renderizar }),
+  });
 
   return (
     <section className="cartao painel">
@@ -232,11 +240,11 @@ function Painel({ jobId, onFim }) {
           <h2>{job?.titulo || '…'}</h2>
           <p className="meta">{job?.selo} · EP {job?.ep}{job?.custo != null && ` · US$ ${job.custo.toFixed(2)}`}</p>
         </div>
-        {rodando && <button className="botao fino" onClick={() => fetch(`/api/jobs/${jobId}/cancelar`, { method: 'POST' })}>Cancelar</button>}
+        {(rodando || aguardando) && <button className="botao fino" onClick={() => fetch(`/api/jobs/${jobId}/cancelar`, { method: 'POST' })}>Cancelar</button>}
       </div>
 
       <ol className="fases">
-        {FASES.filter(([f]) => f !== 'render' || job?.renderizar !== false).map(([f, nome]) => {
+        {FASES.filter(([f]) => (f !== 'confirmar' || job?.renderizar === false) && (f !== 'render' || !job?.pulado)).map(([f, nome]) => {
           const i = FASES.findIndex(([x]) => x === f);
           const st = job?.status === 'ok' || i < idx ? 'feito' : i === idx ? (rodando ? 'agora' : job?.status) : '';
           return (
@@ -249,6 +257,15 @@ function Painel({ jobId, onFim }) {
       </ol>
 
       {job?.erro && <p className="aviso">{job.erro}</p>}
+      {aguardando && (
+        <div className="confirmar">
+          <span>As cenas estão prontas. Confira a prévia abaixo: quer renderizar o MP4 agora (~8 min)?</span>
+          <div className="acoes">
+            <button className="botao fino" onClick={() => decidir(true)}>Renderizar agora</button>
+            <button className="botao fino claro" onClick={() => decidir(false)}>Não renderizar</button>
+          </div>
+        </div>
+      )}
       {job?.status === 'ok' && (
         <div className="entrega">
           <span>Pasta final: <code>{job.pasta}</code></span>

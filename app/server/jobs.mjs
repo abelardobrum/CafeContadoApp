@@ -14,8 +14,8 @@ export const pegarJob = (id) => jobs.get(id);
 export const listarJobs = () => [...jobs.values()].map(resumo).reverse();
 
 export function resumo(j) {
-  const { id, ep, slug, titulo, selo, fase, status, erro, pasta, progresso, custo, criado, renderizar } = j;
-  return { id, ep, slug, titulo, selo, fase, status, erro, pasta, progresso, custo, criado, renderizar };
+  const { id, ep, slug, titulo, selo, fase, status, erro, pasta, progresso, custo, criado, renderizar, pulado } = j;
+  return { id, ep, slug, titulo, selo, fase, status, erro, pasta, progresso, custo, criado, renderizar, pulado };
 }
 
 export function slugify(t) {
@@ -59,6 +59,22 @@ export function cancelarJob(j) {
   j.cancelado = true;
   j.abort.abort();
   if (j.filho) j.filho.kill();
+  j.decidir?.(null);
+}
+
+/** Resposta do usuário quando a renderização automática está desligada. */
+export function confirmarRender(j, sim) {
+  if (!j.decidir) throw new Error('Este episódio não está aguardando confirmação.');
+  j.decidir(Boolean(sim));
+}
+
+function esperarConfirmacao(j) {
+  return new Promise((ok, falha) => {
+    j.decidir = (sim) => {
+      j.decidir = null;
+      sim === null ? falha(new Error('cancelado')) : ok(sim);
+    };
+  });
 }
 
 // ------------------------------------------------------------------ eventos
@@ -96,11 +112,17 @@ async function rodar(j) {
   estado(j, { pasta: path.relative(KIT, destino) });
 
   if (!j.renderizar) {
-    emitir(j, { tipo: 'info', texto: `Render pulado. Para renderizar depois: 2 cliques em episodios\\cafe-contado\\${j.ep}\\RENDER.bat` });
-    estado(j, { fase: 'pronto', status: 'ok' });
-    return;
+    emitir(j, { tipo: 'info', texto: 'Cenas prontas. Confira a prévia e confirme para renderizar.' });
+    estado(j, { fase: 'confirmar', status: 'aguardando' });
+    const sim = await esperarConfirmacao(j);
+    if (!sim) {
+      emitir(j, { tipo: 'info', texto: `Render pulado. Para renderizar depois: 2 cliques em episodios\\cafe-contado\\${j.ep}\\RENDER.bat` });
+      estado(j, { fase: 'pronto', status: 'ok', pulado: true });
+      return;
+    }
+    emitir(j, { tipo: 'info', texto: 'Render confirmado.' });
   }
-  estado(j, { fase: 'render', progresso: 0 });
+  estado(j, { fase: 'render', status: 'rodando', progresso: 0 });
   await renderizar(j, epDir, destino);
   estado(j, { fase: 'pronto', status: 'ok', progresso: 1 });
 }

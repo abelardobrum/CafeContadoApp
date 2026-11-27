@@ -1478,5 +1478,191 @@
   "caminho": "biblioteca/objetos/capacete.png",
   "nome_no_codigo": "capacete",
   "criado_em": "CAFE-ELETRICIDADE"
+ },
+ "derrica.png": {
+  "categoria": "lavoura-e-clima",
+  "caminho": "biblioteca/lavoura-e-clima/derrica.png",
+  "nome_no_codigo": "derrica",
+  "criado_em": "METADE-DO-CAFE-DO-BRASIL-SAI-DE-UM-ESTADO-SO"
+ },
+ "colhedor_mao.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/colhedor_mao.png",
+  "nome_no_codigo": "colhedor_mao",
+  "criado_em": "METADE-DO-CAFE-DO-BRASIL-SAI-DE-UM-ESTADO-SO"
+ },
+ "derricadeira.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/derricadeira.png",
+  "nome_no_codigo": "derricadeira",
+  "criado_em": "METADE-DO-CAFE-DO-BRASIL-SAI-DE-UM-ESTADO-SO"
+ },
+ "rodeiro.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/rodeiro.png",
+  "nome_no_codigo": "rodeiro",
+  "criado_em": "METADE-DO-CAFE-DO-BRASIL-SAI-DE-UM-ESTADO-SO"
+ },
+ "calendario.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/calendario.png",
+  "nome_no_codigo": "calendario",
+  "criado_em": "METADE-DO-CAFE-DO-BRASIL-SAI-DE-UM-ESTADO-SO"
+ },
+ "cheiro.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/cheiro.png",
+  "nome_no_codigo": "cheiro",
+  "criado_em": "METADE-DO-CAFE-DO-BRASIL-SAI-DE-UM-ESTADO-SO"
+ },
+ "sacaria.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/sacaria.png",
+  "nome_no_codigo": "sacaria",
+  "criado_em": "METADE-DO-CAFE-DO-BRASIL-SAI-DE-UM-ESTADO-SO"
+ },
+ "patio_sujo.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/patio_sujo.png",
+  "nome_no_codigo": "patio_sujo",
+  "criado_em": "METADE-DO-CAFE-DO-BRASIL-SAI-DE-UM-ESTADO-SO"
+ },
+ "bg_terreiro.png": {
+  "categoria": "cenarios",
+  "caminho": "biblioteca/cenarios/bg_terreiro.png",
+  "nome_no_codigo": "bg_terreiro",
+  "criado_em": "METADE-DO-CAFE-DO-BRASIL-SAI-DE-UM-ESTADO-SO"
+ },
+ "def_preto.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/def_preto.png",
+  "nome_no_codigo": "def_preto",
+  "criado_em": "A-BOCA-QUE-DECIDE-O-PRECO-DO-SEU-CAFE"
+ },
+ "def_ardido.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/def_ardido.png",
+  "nome_no_codigo": "def_ardido",
+  "criado_em": "A-BOCA-QUE-DECIDE-O-PRECO-DO-SEU-CAFE"
+ },
+ "def_quebrado.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/def_quebrado.png",
+  "nome_no_codigo": "def_quebrado",
+  "criado_em": "A-BOCA-QUE-DECIDE-O-PRECO-DO-SEU-CAFE"
+ },
+ "def_pedra.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/def_pedra.png",
+  "nome_no_codigo": "def_pedra",
+  "criado_em": "A-BOCA-QUE-DECIDE-O-PRECO-DO-SEU-CAFE"
+ },
+ "def_pau.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/def_pau.png",
+  "nome_no_codigo": "def_pau",
+  "criado_em": "A-BOCA-QUE-DECIDE-O-PRECO-DO-SEU-CAFE"
+ },
+ "def_casca.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/def_casca.png",
+  "nome_no_codigo": "def_casca",
+  "criado_em": "A-BOCA-QUE-DECIDE-O-PRECO-DO-SEU-CAFE"
+ },
+ "amostra.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/amostra.png",
+  "nome_no_codigo": "amostra",
+  "criado_em": "A-BOCA-QUE-DECIDE-O-PRECO-DO-SEU-CAFE"
+ },
+ "peneira.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/peneira.png",
+  "nome_no_codigo": "peneira",
+  "criado_em": "A-BOCA-QUE-DECIDE-O-PRECO-DO-SEU-CAFE"
+ },
+ "boca.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/boca.png",
+  "nome_no_codigo": "boca",
+  "criado_em": "A-BOCA-QUE-DECIDE-O-PRECO-DO-SEU-CAFE"
+ },
+ "chaleira.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/chaleira.png",
+  "nome_no_codigo": "chaleira",
+  "criado_em": "A-BOCA-QUE-DECIDE-O-PRECO-DO-SEU-CAFE"
+ },
+ "morango.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/morango.png",
+  "nome_no_codigo": "morango",
+  "criado_em": "CAFE-DE-MORANGO"
+ },
+ "mirtilo.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/mirtilo.png",
+  "nome_no_codigo": "mirtilo",
+  "criado_em": "CAFE-DE-MORANGO"
+ },
+ "molecula.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/molecula.png",
+  "nome_no_codigo": "molecula",
+  "criado_em": "CAFE-DE-MORANGO"
+ },
+ "microbio.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/microbio.png",
+  "nome_no_codigo": "microbio",
+  "criado_em": "CAFE-DE-MORANGO"
+ },
+ "caminhao.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/caminhao.png",
+  "nome_no_codigo": "caminhao",
+  "criado_em": "O-CAMINHO-DA-XICARA"
+ },
+ "conteiner.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/conteiner.png",
+  "nome_no_codigo": "conteiner",
+  "criado_em": "O-CAMINHO-DA-XICARA"
+ },
+ "guindaste.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/guindaste.png",
+  "nome_no_codigo": "guindaste",
+  "criado_em": "O-CAMINHO-DA-XICARA"
+ },
+ "pacote_cafe.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/pacote_cafe.png",
+  "nome_no_codigo": "pacote_cafe",
+  "criado_em": "SABOR-CAFE"
+ },
+ "pacote_sabor.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/pacote_sabor.png",
+  "nome_no_codigo": "pacote_sabor",
+  "criado_em": "SABOR-CAFE"
+ },
+ "coador.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/coador.png",
+  "nome_no_codigo": "coador",
+  "criado_em": "CAFE-EXPRESSO-OU-NO-COADOR-QUAL-E-MAIS-FORTE"
+ },
+ "maq_expresso.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/maq_expresso.png",
+  "nome_no_codigo": "maq_expresso",
+  "criado_em": "CAFE-EXPRESSO-OU-NO-COADOR-QUAL-E-MAIS-FORTE"
+ },
+ "caneca.png": {
+  "categoria": "objetos",
+  "caminho": "biblioteca/objetos/caneca.png",
+  "nome_no_codigo": "caneca",
+  "criado_em": "CAFE-EXPRESSO-OU-NO-COADOR-QUAL-E-MAIS-FORTE"
  }
 }

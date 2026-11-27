@@ -5,7 +5,7 @@ import express from 'express';
 import multer from 'multer';
 import { APP, KIT, PORT, PYTHON, chrome, kitEnv, ffmpegBin } from './config.mjs';
 import { statusClaude, abrirLogin, sair, testar, lerConfig, gravarConfig } from './claude.mjs';
-import { criarJob, pegarJob, listarJobs, jobAtual, cancelarJob, resumo } from './jobs.mjs';
+import { criarJob, pegarJob, listarJobs, jobAtual, cancelarJob, confirmarRender, resumo } from './jobs.mjs';
 
 const app = express();
 const tmp = path.join(KIT, 'entrada', '_upload'); // mesmo disco do kit (rename sem cópia)
@@ -68,6 +68,13 @@ app.post('/api/jobs/:id/cancelar', (req, res) => {
   if (!j) return res.status(404).end();
   cancelarJob(j);
   res.json({ ok: true });
+});
+
+app.post('/api/jobs/:id/render', (req, res) => {
+  const j = pegarJob(req.params.id);
+  if (!j) return res.status(404).end();
+  try { confirmarRender(j, req.body?.renderizar !== false); res.json({ ok: true }); }
+  catch (e) { res.status(409).json({ erro: String(e.message || e) }); }
 });
 
 // Imagens do episódio (prévia e capa)
